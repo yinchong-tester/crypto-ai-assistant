@@ -57,7 +57,7 @@ if st.button("🚀 开始 AI 深度分析"):
         params = {'symbol': symbol}
 
         # 强制走代理访问币安
-        response = requests.get(url, params=params,verify=False,timeout=10)
+        response = requests.get(url, params=params,verify=False,proxies=None,timeout=10)
         data = response.json()
 
         # 解析数据
@@ -94,7 +94,7 @@ if st.button("🚀 开始 AI 深度分析"):
         }
 
         # 发送请求 (一定要带上你的梯子 PROXIES !)
-        res_history = requests.get(history_url, params=history_params,verify=False,timeout=10)
+        res_history = requests.get(history_url, params=history_params,verify=False,proxies=None,timeout=10)
         history_data = res_history.json()
 
         # 2. 【数据清洗】把列表转成 Excel 表格 (DataFrame)
@@ -117,9 +117,9 @@ if st.button("🚀 开始 AI 深度分析"):
 
         # 把线条设成红色或绿色，根据涨跌稍微变一下更好看
         if df['Price'].iloc[-1] > df['Price'].iloc[0]:
-            fig.update_traces(line_color='green')#跌绿
+            fig.update_traces(line_color='green')#涨绿
         else:
-            fig.update_traces(line_color='red')#涨红
+            fig.update_traces(line_color='red')#跌红
 
         # 5. 上架展示
         st.plotly_chart(fig, use_container_width=True)
@@ -196,6 +196,7 @@ if st.button("🚀 开始 AI 深度分析"):
     except Exception as e:
 
         st.error(f"AI 思考超时或出错: {e}")
+
 
 
 
