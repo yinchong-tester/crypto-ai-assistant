@@ -94,7 +94,7 @@ if st.button("🚀 开始 AI 深度分析"):
         }
 
         # 发送请求 (一定要带上你的梯子 PROXIES !)
-        res_history = requests.get(history_url, params=history_params, proxies=PROXIES, timeout=10)
+        res_history = requests.get(history_url, params=history_params,timeout=10)
         history_data = res_history.json()
 
         # 2. 【数据清洗】把列表转成 Excel 表格 (DataFrame)
@@ -196,5 +196,6 @@ if st.button("🚀 开始 AI 深度分析"):
     except Exception as e:
 
         st.error(f"AI 思考超时或出错: {e}")
+
 
 
