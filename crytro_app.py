@@ -55,13 +55,9 @@ if st.button("🚀 开始 AI 深度分析"):
         symbol = coin_map[option]
         url = "https://api.binance.com/api/v3/ticker/24hr"  # 用这个接口可以顺便拿涨跌幅
         params = {'symbol': symbol}
-        proxies = {
-            "http": "http://127.0.0.1:17890",
-            "https": "http://127.0.0.1:17890",
-        }
 
         # 强制走代理访问币安
-        response = requests.get(url, params=params, proxies=PROXIES, timeout=10)
+        response = requests.get(url, params=params, proxies=PROXIES,verify=False,timeout=10)
         data = response.json()
 
         # 解析数据
@@ -200,3 +196,4 @@ if st.button("🚀 开始 AI 深度分析"):
     except Exception as e:
 
         st.error(f"AI 思考超时或出错: {e}")
+
