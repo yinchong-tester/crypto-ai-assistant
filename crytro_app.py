@@ -4,7 +4,15 @@ import plotly.express as px
 import requests
 import time
 from openai import OpenAI  # 导入大家伙
+import os
+import streamlit as st
+# ... (其他 import 保持不变)
 
+# --- 强制环境清理 (Ultimate Override) ---
+# 无论系统环境变量里有没有代理设置，都强制将它们设为空
+os.environ['http_proxy'] = ''
+os.environ['https_proxy'] = ''
+# ----------------------------------------
 # --- 配置区 ---
 
 # 1. 你的 DeepSeek API Key (这里一定要填你自己的！)
@@ -196,6 +204,7 @@ if st.button("🚀 开始 AI 深度分析"):
     except Exception as e:
 
         st.error(f"AI 思考超时或出错: {e}")
+
 
 
 
