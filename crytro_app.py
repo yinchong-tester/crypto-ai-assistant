@@ -12,11 +12,11 @@ from openai import OpenAI  # 导入大家伙
 API_KEY = "sk-c5b2d58bf5784ef4b687d845182f1ee7"#AI配置
 
 # 2. 梯子配置 (只用于抓币安数据，DeepSeek 不需要梯子)
-PROXIES = {
-    "http": "http://127.0.0.1:17890",
-    "https": "http://127.0.0.1:17890",
-}
-
+#PROXIES = {
+    #"http": "http://127.0.0.1:17890",
+    #"https": "http://127.0.0.1:17890",
+#}
+# 这一步去除了，在使用streamlit的云端服务器时，其本身就在美国，也不需要代理网络，后面get访问里面的proxies也需要删除
 # 3. 初始化 AI 客户端 (连接到 DeepSeek)
 client = OpenAI(
     api_key=API_KEY,
@@ -57,7 +57,7 @@ if st.button("🚀 开始 AI 深度分析"):
         params = {'symbol': symbol}
 
         # 强制走代理访问币安
-        response = requests.get(url, params=params, proxies=PROXIES,verify=False,timeout=10)
+        response = requests.get(url, params=params,timeout=10)
         data = response.json()
 
         # 解析数据
@@ -196,4 +196,5 @@ if st.button("🚀 开始 AI 深度分析"):
     except Exception as e:
 
         st.error(f"AI 思考超时或出错: {e}")
+
 
